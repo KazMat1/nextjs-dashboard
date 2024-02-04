@@ -3,19 +3,20 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import { QUERY_PARAMS, DEBOUNCED_SECONDS, INITIAL_PAGE_NUMBER } from './invoices/constants';
 
 export default function Search({ placeholder }: { placeholder: string }) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const DEBOUNCED_SECONDS = 300;
 
     const handleSearch = useDebouncedCallback((term: string) => {
         const params = new URLSearchParams(searchParams);
+        params.set(QUERY_PARAMS.page, INITIAL_PAGE_NUMBER.toString());
         if (term) {
-            params.set('query', term)
+            params.set(QUERY_PARAMS.query, term)
         } else {
-            params.delete('query')
+            params.delete(QUERY_PARAMS.query)
         }
         replace(`${pathname}?${params.toString()}`);
     }, DEBOUNCED_SECONDS)
@@ -29,7 +30,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
                 className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 placeholder={placeholder}
                 onChange={(e) => handleSearch(e.target.value)}
-                defaultValue={searchParams.get('query')?.toString()}
+                defaultValue={searchParams.get(QUERY_PARAMS.query)?.toString()}
             />
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
         </div>
