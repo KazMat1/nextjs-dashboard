@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
-import { QUERY_PARAMS, DEBOUNCED_SECONDS, INITIAL_PAGE_NUMBER } from './invoices/constants';
+import { QUERY_PARAMS, DEBOUNCED_SECONDS, INITIAL_PAGE_NUMBER } from '../consts/invoice';
 
 export default function Search({ placeholder }: { placeholder: string }) {
     const searchParams = useSearchParams();

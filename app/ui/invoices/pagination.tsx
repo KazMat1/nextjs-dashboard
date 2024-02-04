@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { INITIAL_PAGE_NUMBER, QUERY_PARAMS } from './constants';
+import { INITIAL_PAGE_NUMBER, QUERY_PARAMS } from '../../consts/invoice';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
     // NOTE: comment in this code when you get to this point in the course
